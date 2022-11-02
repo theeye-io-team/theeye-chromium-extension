@@ -35,7 +35,7 @@ form.addEventListener('submit', (e) => {
         client_secret: data.client_secret,
         customer_name: data.customer_name
       }
-      console.log(tokens)
+      chrome.storage.local.set(tokens)
     })
   }).catch(function (error) {
     alert('Credentials invalid')
