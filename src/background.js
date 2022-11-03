@@ -9,3 +9,7 @@ chrome.runtime.onInstalled.addListener((event) => {
     promptUserForCredentials()
   }
 })
+
+chrome.storage.onChanged.addListener((changes, namespace) => {
+  console.log({changes, namespace})
+})

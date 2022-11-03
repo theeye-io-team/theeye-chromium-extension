@@ -29,13 +29,19 @@ form.addEventListener('submit', (e) => {
       headers: new Headers({
         'Authorization': 'Bearer ' + access_token, 
       })
+    }).then(function (response) {
+      if (response.ok) {
+        return response.json();
+      }
+      return Promise.reject(response);
     }).then(function (data) {
-      const tokens = { 
+      const credentials = { 
         client_id: data.client_id,
         client_secret: data.client_secret,
         customer_name: data.customer_name
       }
-      chrome.storage.local.set(tokens)
+      console.log(credentials)
+      chrome.storage.local.set({credentials})
     })
   }).catch(function (error) {
     alert('Credentials invalid')
