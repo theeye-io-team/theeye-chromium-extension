@@ -12,4 +12,7 @@ chrome.runtime.onInstalled.addListener((event) => {
 
 chrome.storage.onChanged.addListener((changes, namespace) => {
   console.log({changes, namespace})
+  if (Object.keys(changes).includes("agent")) {
+    console.log('success!')
+  }
 })
