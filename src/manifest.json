@@ -31,7 +31,14 @@
   ],
   "host_permissions": [
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+    "chrome-extension://*/*",
+    "sandbox/index.html"
   ],
+  "sandbox": {
+    "pages": [
+      "sandbox/index.html"
+    ]
+  },
   "author": "EzeKoren"
 }

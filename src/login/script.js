@@ -23,11 +23,10 @@ form.addEventListener('submit', (e) => {
 		}
 		return Promise.reject(response);
 	}).then(function (data) {
-    const { access_token } = data
     fetch('https://app.theeye.io/api/bot/installer', {
       method: 'GET',
       headers: new Headers({
-        'Authorization': 'Bearer ' + access_token, 
+        'Authorization': 'Bearer ' + data.access_token, 
       })
     }).then(function (response) {
       if (response.ok) {
@@ -53,14 +52,14 @@ form.addEventListener('submit', (e) => {
         }
         return Promise.reject(response);
       }).then(function (data) {
-        chrome.storage.local.set({ credentials: { ...client, token: data.access_token } })
+        chrome.storage.local.set({ client, access_token: data.access_token })
         fetch('https://supervisor.theeye.io/host', {
           method: 'POST',
           headers: new Headers({
             'Authorization': 'Bearer ' + data.access_token, 
             'Content-Type': 'application/json;charset=UTF-8'
           }),
-          body: JSON.stringify({ hostname: 'Chromium agent' }) // TODO: Make this user editable
+          body: JSON.stringify({ hostname: 'ChromiumAgent' }) // TODO: Make this user editable
         }).then(function (response) {
           if (response.ok) {
             return response.json();
